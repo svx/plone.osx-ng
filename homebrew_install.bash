@@ -21,6 +21,7 @@ e_header "Check if Homebrew is installed"
 
 # Let us check if we have already some dependencies installed:
 # make sure we use the right python prefix [see other post]
+# brew install python --brewed-with-openssl
 
 e_header "Check Homebrew Packages"
 
