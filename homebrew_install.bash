@@ -1,32 +1,53 @@
 #!/bin/bash
 
+source utils.sh
 # we want an error function
 
-
-# ok happy we will check now for xcode-commandline tools
-# if not installed we will install them
-
-
+e_header "Check if Homebrew is installed"
 #
 # Check if Homebrew is installed
 #
-which -s brew
-if [[ $? != 0 ]] ; then
+#which -s brew
+#if [[ $? != 0 ]] ; then
 # Install Homebrew
 # https://github.com/mxcl/homebrew/wiki/installation
-/usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-brew doctor
+#   e_header "Installing Homebrew"
+#   /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+#   brew doctor
+#else
+#   e_header "Updating Homebrew"
+#   brew update
+#fi
+
+# Let us check if we have already some dependencies installed:
+# make sure we use the right python prefix [see other post]
+
+e_header "Check Homebrew Packages"
+
+recipes=(
+  openssl
+  readline
+  wget
+  dialog
+  git
+)
+list="$(to_install "${recipes[*]}" "$(brew list)")"
+if [[ "$list" ]]; then
+for item in ${list[@]}
+  do
+    echo "$item is not on the list"
+  done
 else
-brew update
+e_arrow "Nothing to install.  You've already got them all."
 fi
 
-BREWPACKS=(dialog wget python git)
+# Downloading Plone
+#e_header "Downloading Plone"
 
- # Second we will loop through the list and echo item
-for i in ${BREWPACKS[@]}
- do
-    echo $i
-done
+# Unpacking Plone
 
-# Here we will check if we have installed or if we need something to insttall
+# Prompt to install.sh
 
+# Watch the output
+
+# Beer
