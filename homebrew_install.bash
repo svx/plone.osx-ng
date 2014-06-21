@@ -1,5 +1,4 @@
 #!/bin/bash
- # First we have the list of items
 
 # we want an error function
 
@@ -8,10 +7,18 @@
 # if not installed we will install them
 
 
-# note: do we want to checl if stuff is installed via bash or via apple script?
-
-# Here we will install homebrew
-# ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+#
+# Check if Homebrew is installed
+#
+which -s brew
+if [[ $? != 0 ]] ; then
+# Install Homebrew
+# https://github.com/mxcl/homebrew/wiki/installation
+/usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+brew doctor
+else
+brew update
+fi
 
 BREWPACKS=(dialog wget python git)
 
